@@ -2,7 +2,7 @@ NAME	=	philo
 CC		=	cc
 DEPS	=	philo.h
 FLAGS	=	-Wall -Wextra -Werror -g -pthread
-SRC		=	main.c initiate.c dinner.c
+SRC		=	main.c initiate.c dinner.c utils.c
 OBJ		=	$(SRC:.c=.o)
 RM		=	rm -f
 

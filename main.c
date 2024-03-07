@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:08:02 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/07 12:33:28 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:01:43 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ int	main(int argc, char **argv)
 	if (ft_check_args(argc, argv, &arg) == 0)
 	{
 		ft_initiate(&arg);
-		ft_dinner(&arg);
-		//ft_clean(&arg); TODO
-		printf("OK\n");
+		ft_simulation(&arg);
+		ft_clean(&arg);
 	}
 	return (0);
 }

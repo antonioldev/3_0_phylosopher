@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:31:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/07 12:30:16 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:01:42 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,16 @@
 # include <sys/time.h>
 # include <limits.h>
 
-typedef struct s_arg t_arg;
-
 typedef pthread_mutex_t	t_mtx;
+//typedef struct s_arg	t_arg;
 
-typedef struct	s_fork
+typedef struct s_fork
 {
 	int		fork_id;
 	t_mtx	fork_mutex;
 }			t_fork;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	int			id;
 	int			meal_consumed;
@@ -55,7 +54,7 @@ typedef struct s_arg
 	long		time_to_eat;
 	long		time_to_sleep;
 	long		times_dinner;
-	//long		start;
+	long		start;
 	//long		threads_running_nbr;
 	bool		end;
 	bool		all_thread_ready;
@@ -63,9 +62,11 @@ typedef struct s_arg
 	//t_mtx		write_mutex;
 	t_fork		*forks;
 	t_philo		*philos;
-	//pthread_t	monitor;
+	pthread_t	monitor;
 }				t_arg;
 
 void	ft_initiate(t_arg *arg);
-void	ft_dinner(t_arg *arg)
+void	ft_simulation(t_arg *arg);
+void	ft_clean(t_arg *arg);
+long	ft_get_time(long time);
 #endif
