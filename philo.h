@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:31:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/07 11:27:17 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:30:16 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,5 @@ typedef struct s_arg
 }				t_arg;
 
 void	ft_initiate(t_arg *arg);
+void	ft_dinner(t_arg *arg)
 #endif

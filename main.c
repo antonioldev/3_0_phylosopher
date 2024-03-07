@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:08:02 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/07 11:36:36 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:33:28 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static int	ft_check_args(int argc, char **argv, t_arg *arg)
 		printf("Arguments are invalid!\n");
 		return (2);
 	}
+	if (arg->times_dinner == 0)
+		return (1);
 	return (0);
 }
 
@@ -67,7 +69,7 @@ int	main(int argc, char **argv)
 	if (ft_check_args(argc, argv, &arg) == 0)
 	{
 		ft_initiate(&arg);
-		//ft_dinner(&arg); TODO
+		ft_dinner(&arg);
 		//ft_clean(&arg); TODO
 		printf("OK\n");
 	}
