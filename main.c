@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:08:02 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/06 15:24:58 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:36:36 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ static long	ft_atol(const char *nptr)
 	result = 0;
 	while (nptr[i] != '\0')
 	{
-		if (nptr[i] >= '0' && nptr[i] <= 9)
+		if (nptr[i] >= '0' && nptr[i] <= '9')
 		{
 			result *= 10;
-			result += nptr[i] - 48;
+			result += (nptr[i] - '0');
 		}
 		else
 			return (-2);
+		i++;
 	}
 	if (result > INT_MAX)
 		return (-2);
@@ -53,7 +54,7 @@ static int	ft_check_args(int argc, char **argv, t_arg *arg)
 		|| arg->time_to_die <= 0 || arg->time_to_eat <= 0
 		|| arg->time_to_sleep <= 0 || arg->times_dinner < -1)
 	{
-		printf("Arguments are invalid\n");
+		printf("Arguments are invalid!\n");
 		return (2);
 	}
 	return (0);
@@ -65,9 +66,10 @@ int	main(int argc, char **argv)
 
 	if (ft_check_args(argc, argv, &arg) == 0)
 	{
-		//ft_data_init(&arg); TODO
+		ft_initiate(&arg);
 		//ft_dinner(&arg); TODO
 		//ft_clean(&arg); TODO
+		printf("OK\n");
 	}
 	return (0);
 }

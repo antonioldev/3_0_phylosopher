@@ -2,9 +2,12 @@ NAME	=	philo
 CC		=	cc
 DEPS	=	philo.h
 FLAGS	=	-Wall -Wextra -Werror -g -pthread
-SRC		=	main.c
+SRC		=	main.c initiate.c
 OBJ		=	$(SRC:.c=.o)
 RM		=	rm -f
+
+test	:
+		$(CC) $(SRC) -o $(NAME)
 
 all		:	$(NAME)
 
@@ -20,8 +23,6 @@ clean	:
 fclean	:	clean
 			$(RM) $(NAME)
 
-re		:
-			fclean
-			all
+re		:	fclean all
 
 .PHONY	: all clean fclean re
