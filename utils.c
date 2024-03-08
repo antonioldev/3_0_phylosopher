@@ -6,11 +6,18 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:25:25 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/08 13:37:20 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:52:24 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	set_end_dinner(t_arg *arg)
+{
+	pthread_mutex_lock(&arg->arg_mutex);
+	arg->end = true;
+	pthread_mutex_unlock(&arg->arg_mutex);
+}
 
 bool	end_dinner(t_arg *arg)
 {

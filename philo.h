@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:31:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/08 12:51:26 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:43:20 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_arg
 	long			time_to_sleep;
 	long			times_dinner;
 	long			start;
-	//long			threads_running_nbr;
 	bool			end;
 	bool			all_thread_ready;
 	t_fork			*forks;
@@ -71,5 +70,6 @@ void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo);
 long	ft_get_time(long time);
+void	set_end_dinner(t_arg *arg);
 bool	end_dinner(t_arg *arg);
 #endif
