@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:28:52 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/08 17:02:15 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/09 12:51:51 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,22 @@ static void	*dinner_alone(void *data)
 	long		time;
 	t_philo		*philo;
 
+	time = 0;
 	philo = (t_philo *)data;
 	pthread_mutex_lock(&philo->first_fork->fork);
 	printf("%li %i has taken a fork\n", ft_get_time(time), philo->id);
 	pthread_mutex_unlock(&philo->first_fork->fork);
-	while(!end_dinner(philo->arg))
-		usleep(200);
+	while (!end_dinner(philo->arg))
+	{
+		time = ft_get_time(time);
+		if ((time - philo->last_meal) > philo->arg->time_to_die)
+		{
+			set_end_dinner(philo);// helgrind error
+			ft_write_state(philo, "has died");
+		}
+		if (philo->is_full || philo->arg->end)
+			break ;
+	}
 	return (NULL);
 }
 
@@ -31,15 +41,18 @@ static void	*dinner(void *data)
 	long		time;
 	t_philo		*philo;
 
+	time = 0;
 	philo = (t_philo *)data;
+	while (!wait_all_threads(philo->arg))
+		;
 	while (!end_dinner(philo->arg))
 	{
 		time = ft_get_time(time);
-		printf("             %li || %li\n",time - philo->last_meal, philo->arg->time_to_die);//
 		if ((time - philo->last_meal) > philo->arg->time_to_die)
 		{
-			set_end_dinner(philo->arg);
-			printf("%li %i has died\n", time, philo->id);
+			//set_end_dinner(philo);// helgrind error
+			ft_write_state(philo, "has died");
+			//printf("%li %i has died\n", time, philo->id);
 		}
 		if (philo->is_full || philo->arg->end)
 			break ;
@@ -47,11 +60,6 @@ static void	*dinner(void *data)
 		ft_sleep(philo);
 		ft_think(philo);
 	}
-	return (NULL);
-}
-
-static void	*monitor()
-{
 	return (NULL);
 }
 
@@ -68,11 +76,8 @@ void	ft_simulation(t_arg *arg)
 		while (++i < arg->num_philo)
 			pthread_create(&arg->philos[i].thread_id, NULL, dinner,
 				&arg->philos[i]);
-	pthread_create(&arg->monitor, NULL, monitor, NULL);
 	arg->all_thread_ready = true;
 	i = -1;
 	while (++i < arg->num_philo)
 		pthread_join(arg->philos[i].thread_id, NULL);
-	arg->end = true;
-	pthread_join(arg->monitor, NULL);
 }

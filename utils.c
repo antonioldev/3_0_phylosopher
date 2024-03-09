@@ -6,17 +6,27 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:25:25 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/08 15:52:24 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/09 12:50:18 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	set_end_dinner(t_arg *arg)
+bool	wait_all_threads(t_arg *arg)
 {
+	bool	res;
+
 	pthread_mutex_lock(&arg->arg_mutex);
-	arg->end = true;
+	res = arg->all_thread_ready;
 	pthread_mutex_unlock(&arg->arg_mutex);
+	return (res);
+}
+
+void	set_end_dinner(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->arg->arg_mutex);
+	philo->arg->end = true;
+	pthread_mutex_unlock(&philo->arg->arg_mutex);
 }
 
 bool	end_dinner(t_arg *arg)
@@ -49,6 +59,7 @@ void	ft_clean(t_arg *arg)
 		pthread_mutex_destroy(&arg->forks[i].fork);
 		i++;
 	}
+	pthread_mutex_destroy(&arg->write_mutex);
 	pthread_mutex_destroy(&arg->arg_mutex);
 	free(arg->philos);
 	free(arg->forks);
