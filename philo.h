@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:31:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/09 12:29:52 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/09 17:46:00 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,4 @@ long	ft_get_time(long time);
 void	set_end_dinner(t_philo *philo);
 void	ft_write_state(t_philo *philo, const char *str);
 bool	end_dinner(t_arg *arg);
-bool	wait_all_threads(t_arg *arg);
 #endif

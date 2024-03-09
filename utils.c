@@ -6,21 +6,11 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:25:25 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/09 12:50:18 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:01:25 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-bool	wait_all_threads(t_arg *arg)
-{
-	bool	res;
-
-	pthread_mutex_lock(&arg->arg_mutex);
-	res = arg->all_thread_ready;
-	pthread_mutex_unlock(&arg->arg_mutex);
-	return (res);
-}
 
 void	set_end_dinner(t_philo *philo)
 {
