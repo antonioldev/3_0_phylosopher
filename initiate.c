@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:55:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/09 12:14:19 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:44:57 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_initiate(t_arg *arg)//Check comment
 		pthread_mutex_init(&arg->forks[i].fork, NULL);
 		arg->philos[i].id = i + 1;
 		arg->philos[i].meal_consumed = 0;
-		arg->philos[i].last_meal = ft_get_time(arg->philos[i].last_meal);
+		arg->philos[i].last_meal = ft_get_time();
 		arg->philos[i].is_full = false;
 		arg->philos[i].arg = arg;
 		pthread_mutex_init(&arg->philos[i].philo_mutex, NULL);

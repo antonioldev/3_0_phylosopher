@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:31:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/09 17:46:00 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:32:51 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_arg
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
+	long			time_to_think;
 	long			times_dinner;
 	long			start;
 	bool			end;
@@ -69,8 +70,8 @@ void	ft_clean(t_arg *arg);
 void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo);
-long	ft_get_time(long time);
+long	ft_get_time(void);
 void	set_end_dinner(t_philo *philo);
-void	ft_write_state(t_philo *philo, const char *str);
-bool	end_dinner(t_arg *arg);
+void	ft_write_state(t_philo *philo, const char *str, long time);
+bool	end_dinner(t_philo *philo);
 #endif
