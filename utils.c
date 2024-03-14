@@ -6,25 +6,38 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:25:25 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/13 17:15:31 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:58:13 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+size_t	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] != '\0' || s2[i] != '\0')
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2 [i]);
+		i++;
+	}
+	return (0);
+}
+
 void	set_end_dinner(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->philo_mutex);
 	pthread_mutex_lock(&philo->arg->arg_mutex);
 	philo->arg->end = true;
 	pthread_mutex_unlock(&philo->arg->arg_mutex);
-	pthread_mutex_unlock(&philo->philo_mutex);
 }
 
 bool	end_dinner(t_philo *philo)
 {
 	bool	res;
 
+	res = false;
 	pthread_mutex_lock(&philo->arg->arg_mutex);
 	res = philo->arg->end;
 	pthread_mutex_unlock(&philo->arg->arg_mutex);
@@ -33,7 +46,7 @@ bool	end_dinner(t_philo *philo)
 
 long	ft_get_time(void)
 {
-	long	time;
+	long			time;
 	struct timeval	current_time;
 
 	time = 0;
@@ -54,7 +67,6 @@ void	ft_clean(t_arg *arg)
 		i++;
 	}
 	pthread_mutex_destroy(&arg->write_mutex);
-	//pthread_mutex_destroy(&arg->arg_mutex);
 	free(arg->philos);
 	free(arg->forks);
 }

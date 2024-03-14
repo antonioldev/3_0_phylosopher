@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:55:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/13 16:44:57 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:44:51 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static void	assign_forks(int num_philo, t_philo *philo, t_fork *forks, int i)
 	next = (i + 1) % num_philo;
 	if (philo->id % 2 == 1)
 	{
-		philo->first_fork = &forks[next];
-		philo->second_fork = &forks[i];
+		philo->first_fork = &forks[i];
+		philo->second_fork = &forks[next];
 	}
 	else
 	{
-		philo->first_fork = &forks[i];
-		philo->second_fork = &forks[next];
+		philo->first_fork = &forks[next];
+		philo->second_fork = &forks[i];
 	}
 }
 
@@ -47,7 +47,6 @@ void	ft_initiate(t_arg *arg)//Check comment
 		pthread_mutex_init(&arg->forks[i].fork, NULL);
 		arg->philos[i].id = i + 1;
 		arg->philos[i].meal_consumed = 0;
-		arg->philos[i].last_meal = ft_get_time();
 		arg->philos[i].is_full = false;
 		arg->philos[i].arg = arg;
 		pthread_mutex_init(&arg->philos[i].philo_mutex, NULL);

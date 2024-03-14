@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:08:02 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/13 13:32:34 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/14 17:23:12 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,15 @@ static long	ft_atol(const char *nptr)
 static int	ft_check_args(int argc, char **argv, t_arg *arg)
 {
 	if (argc < 5 || argc > 6)
-	{
-		printf("Wrong number of arguments\n");
-		return (1);
-	}
+		return (printf("Wrong number of arguments\n"), 1);
 	arg->num_philo = ft_atol(argv[1]);
 	arg->time_to_die = ft_atol(argv[2]);
 	arg->time_to_eat = ft_atol(argv[3]);
 	arg->time_to_sleep = ft_atol(argv[4]);
-	arg->time_to_think = (arg->time_to_eat + arg->time_to_sleep 
-		- arg->time_to_die) / 3;
+	arg->time_to_think = (arg->time_to_eat + arg->time_to_sleep
+			- arg->time_to_die) / 3;
 	if (arg->time_to_think < 0)
-		arg->time_to_think = 50;//??REALLY
+		arg->time_to_think = 50;
 	if (argc == 5)
 		arg->times_dinner = -1;
 	else
@@ -57,10 +54,7 @@ static int	ft_check_args(int argc, char **argv, t_arg *arg)
 	if (arg->num_philo <= 0 || arg->num_philo > 200
 		|| arg->time_to_die <= 0 || arg->time_to_eat <= 0
 		|| arg->time_to_sleep <= 0 || arg->times_dinner < -1)
-	{
-		printf("Arguments are invalid!\n");
-		return (2);
-	}
+		return (printf("Arguments are invalid!\n"), 2);
 	if (arg->times_dinner == 0)
 		return (1);
 	return (0);
