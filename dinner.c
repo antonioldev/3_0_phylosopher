@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:28:52 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/15 14:37:08 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:52:03 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	set_all_threads_ready(t_arg *arg)
 	i = -1;
 	while (++i < arg->num_philo)
 	{
-		pthread_mutex_lock(&arg->philos[i].philo_mutex);
+		//pthread_mutex_lock(&arg->philos[i].philo_mutex);
 		arg->philos[i].last_meal = arg->start;
-		pthread_mutex_unlock(&arg->philos[i].philo_mutex);
+		//pthread_mutex_unlock(&arg->philos[i].philo_mutex);
 	}
 	pthread_mutex_lock(&arg->arg_mutex);
 	arg->all_thread_ready = true;
@@ -55,7 +55,7 @@ static void	*dinner_alone(void *data)
 		if ((time - philo->last_meal) > philo->arg->time_to_die)
 		{
 			ft_write_state(philo, "died", time);
-			set_end_dinner(philo);
+			//set_end_dinner(philo);
 		}
 	}
 	return (NULL);
@@ -69,7 +69,7 @@ static void	*dinner(void *data)
 	while (!all_threads_ready(philo->arg))
 		usleep(1000);
 	if (philo->id % 2 == 0)
-		ft_thread_suspension(philo, philo->arg->time_to_wait);
+		ft_thread_suspension(/*philo, */philo->arg->time_to_wait);
 	while (!end_dinner(philo))
 	{
 		if (philo->is_full || philo->arg->end)

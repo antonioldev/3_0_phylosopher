@@ -1,19 +1,16 @@
 {
-	// Use IntelliSense to learn about possible attributes.
-	// Hover to view descriptions of existing attributes.
-	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-	"version": "0.2.0",
-	"configurations": [
+    "version": "0.2.0",
+    "configurations": [
         {
-            "name": "C Debug",
+            "name": "Debug philo",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/alimotta/Documents/42/common_core/3_0_phylosopher/philo", // Specify the path to your executable
-            "args": ["1 100 400 400 5"], // Add any command-line arguments here
+            "program": "/home/alimotta/Documents/42/common_core/3_0_phylosopher",
+            "args": ["50", "600", "350", "200"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": true,
+            "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [
                 {
@@ -22,7 +19,8 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "build" // Specify the name of the build task
+            "preLaunchTask": "build",
+            "miDebuggerPath": "/usr/bin/gdb"
         }
-	]
+    ]
 }
