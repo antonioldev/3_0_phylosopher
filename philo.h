@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:31:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/14 14:23:34 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:33:53 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_philo
 	int				meal_consumed;
 	bool			is_full;
 	long			last_meal;
+	//long			thinking;
 	t_fork			*first_fork;
 	t_fork			*second_fork;
 	t_arg			*arg;

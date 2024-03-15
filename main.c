@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:08:02 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/14 17:23:12 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:31:27 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@ static long	ft_atol(const char *nptr)
 	return (result);
 }
 
+static long	ft_decide_thinking_time(t_arg *arg)
+{
+	long	time;
+
+	if (arg->time_to_die >= 2 * (arg->time_to_eat + arg->time_to_sleep)
+		|| arg->time_to_eat == arg->time_to_sleep)
+		time = arg->time_to_die - arg->time_to_eat - arg->time_to_sleep - 50;
+	else
+		time = arg->time_to_eat - arg->time_to_sleep;
+	if (time < 0)
+		time *= -1;
+	return (time);
+}
+
 static int	ft_check_args(int argc, char **argv, t_arg *arg)
 {
 	if (argc < 5 || argc > 6)
@@ -43,10 +57,7 @@ static int	ft_check_args(int argc, char **argv, t_arg *arg)
 	arg->time_to_die = ft_atol(argv[2]);
 	arg->time_to_eat = ft_atol(argv[3]);
 	arg->time_to_sleep = ft_atol(argv[4]);
-	arg->time_to_think = (arg->time_to_eat + arg->time_to_sleep
-			- arg->time_to_die) / 3;
-	if (arg->time_to_think < 0)
-		arg->time_to_think = 50;
+	arg->time_to_think = ft_decide_thinking_time(arg);
 	if (argc == 5)
 		arg->times_dinner = -1;
 	else

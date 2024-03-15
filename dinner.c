@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:28:52 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/14 14:24:13 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:37:08 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static void	*dinner_alone(void *data)
 
 static void	*dinner(void *data)
 {
-	long		time;
 	t_philo		*philo;
 
 	philo = (t_philo *)data;
@@ -73,12 +72,6 @@ static void	*dinner(void *data)
 		ft_thread_suspension(philo, philo->arg->time_to_wait);
 	while (!end_dinner(philo))
 	{
-		time = ft_get_time();
-		if ((time - philo->last_meal) > philo->arg->time_to_die)
-		{
-			ft_write_state(philo, "died", time);
-			set_end_dinner(philo);
-		}
 		if (philo->is_full || philo->arg->end)
 			break ;
 		ft_eat(philo);
