@@ -1,26 +1,26 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Debug philo",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "/home/alimotta/Documents/42/common_core/3_0_phylosopher",
-            "args": ["50", "600", "350", "200"],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "build",
-            "miDebuggerPath": "/usr/bin/gdb"
-        }
-    ]
-}
+	"version": "0.2.0",
+	"configurations": [
+	  {
+		"name": "Debug philo",
+		"type": "cppdbg",
+		"request": "launch",
+		"program": "${workspaceFolder}/philo", // Path to your executable
+		"args": ["5", "500", "200", "100", "5"], // Arguments passed to your program
+		"stopAtEntry": false,
+		"cwd": "${workspaceFolder}",
+		"environment": [],
+		"externalConsole": false,
+		"MIMode": "gdb",
+		"setupCommands": [
+		  {
+			"description": "Enable pretty-printing for gdb",
+			"text": "-enable-pretty-printing",
+			"ignoreFailures": true
+		  }
+		],
+		"preLaunchTask": "make" // The task name defined in your tasks.json for building (e.g., "make")
+	  }
+	]
+  }
+  

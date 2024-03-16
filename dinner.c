@@ -6,12 +6,14 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:28:52 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/16 08:34:09 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/16 11:15:21 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/*This function is called after all threads have been created
+It sets the starting time of the simulation*/
 static void	set_all_threads_ready(t_arg *arg)
 {
 	int	i;
@@ -24,6 +26,7 @@ static void	set_all_threads_ready(t_arg *arg)
 	pthread_mutex_unlock(&arg->arg_mutex);
 }
 
+/*This function check if all threads are ready*/
 static bool	all_threads_ready(t_arg *arg)
 {
 	bool	res;
@@ -34,6 +37,7 @@ static bool	all_threads_ready(t_arg *arg)
 	return (res);
 }
 
+/*This function is used when only one philo is at the table*/
 static void	*dinner_alone(void *data)
 {
 	long		time;
@@ -54,6 +58,8 @@ static void	*dinner_alone(void *data)
 	return (NULL);
 }
 
+/*This function waits for all threads to be ready and it loops 
+through the dinner cycle till the end of the simulation*/
 static void	*dinner(void *data)
 {
 	t_philo		*philo;
@@ -62,7 +68,7 @@ static void	*dinner(void *data)
 	while (!all_threads_ready(philo->arg))
 		usleep(1000);
 	if (philo->id % 2 == 0)
-		ft_thread_suspension(philo->arg->time_to_wait);
+		ft_thread_suspension(philo->arg->time_to_think);
 	while (!end_dinner(philo))
 	{
 		if (philo->is_full)
@@ -74,15 +80,12 @@ static void	*dinner(void *data)
 	return (NULL);
 }
 
+/*This function creates the threads and lunch the simulation*/
 void	ft_simulation(t_arg *arg)
 {
 	int	i;
 
 	i = -1;
-	if (arg->time_to_die < arg->time_to_eat)
-		arg->time_to_wait = arg->time_to_die;
-	else
-		arg->time_to_wait = arg->time_to_eat;
 	if (arg->num_philo == 1)
 		pthread_create(&arg->philos[0].thread_id, NULL, dinner_alone,
 			&arg->philos[0]);

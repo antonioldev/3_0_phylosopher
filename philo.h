@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:31:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/16 08:32:22 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:24:47 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_philo
 	t_fork			*second_fork;
 	t_arg			*arg;
 	pthread_t		thread_id;
-	pthread_mutex_t	philo_mutex;
 }				t_philo;
 
 typedef struct s_arg
@@ -53,7 +52,6 @@ typedef struct s_arg
 	long			time_to_eat;
 	long			time_to_sleep;
 	long			time_to_think;
-	long			time_to_wait;
 	long			times_dinner;
 	long			start;
 	bool			end;
@@ -64,7 +62,7 @@ typedef struct s_arg
 	pthread_mutex_t	write_mutex;
 }				t_arg;
 
-void	ft_initiate(t_arg *arg);
+int		ft_initiate(t_arg *arg);
 void	ft_simulation(t_arg *arg);
 void	ft_clean(t_arg *arg);
 void	ft_eat(t_philo *philo);

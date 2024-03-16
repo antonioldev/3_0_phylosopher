@@ -6,12 +6,13 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:25:25 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/16 08:33:10 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/16 11:13:00 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/*Compare if two strings are equal*/
 size_t	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;
@@ -26,24 +27,7 @@ size_t	ft_strcmp(const char *s1, const char *s2)
 	return (0);
 }
 
-void	set_end_dinner(t_arg *arg)
-{
-	pthread_mutex_lock(&arg->arg_mutex);
-	arg->end = true;
-	pthread_mutex_unlock(&arg->arg_mutex);
-}
-
-bool	end_dinner(t_philo *philo)
-{
-	bool	res;
-
-	res = false;
-	pthread_mutex_lock(&philo->arg->arg_mutex);
-	res = philo->arg->end;
-	pthread_mutex_unlock(&philo->arg->arg_mutex);
-	return (res);
-}
-
+/*This function get the time and convert into milliseconds*/
 long	ft_get_time(void)
 {
 	long			time;
@@ -55,6 +39,7 @@ long	ft_get_time(void)
 	return (time);
 }
 
+/*This function destroys all mutex and free memory allocated by malloc*/
 void	ft_clean(t_arg *arg)
 {
 	int	i;
@@ -63,6 +48,7 @@ void	ft_clean(t_arg *arg)
 	while (++i < arg->num_philo)
 		pthread_mutex_destroy(&arg->forks[i].fork);
 	pthread_mutex_destroy(&arg->write_mutex);
+	pthread_mutex_destroy(&arg->arg_mutex);
 	free(arg->philos);
 	free(arg->forks);
 }

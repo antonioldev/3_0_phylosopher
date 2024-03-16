@@ -6,12 +6,13 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:08:02 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/15 14:31:27 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:27:04 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/*This function convert the string into a long int*/
 static long	ft_atol(const char *nptr)
 {
 	int		i;
@@ -35,6 +36,7 @@ static long	ft_atol(const char *nptr)
 	return (result);
 }
 
+/*This function calculate the thinking time, based on the arguments passed*/
 static long	ft_decide_thinking_time(t_arg *arg)
 {
 	long	time;
@@ -49,6 +51,7 @@ static long	ft_decide_thinking_time(t_arg *arg)
 	return (time);
 }
 
+/*This function check if arguments pased are valid*/
 static int	ft_check_args(int argc, char **argv, t_arg *arg)
 {
 	if (argc < 5 || argc > 6)
@@ -77,9 +80,11 @@ int	main(int argc, char **argv)
 
 	if (ft_check_args(argc, argv, &arg) == 0)
 	{
-		ft_initiate(&arg);
-		ft_simulation(&arg);
-		ft_clean(&arg);
+		if (ft_initiate(&arg) == 0)
+		{
+			ft_simulation(&arg);
+			ft_clean(&arg);
+		}
 	}
 	return (0);
 }
