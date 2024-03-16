@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:31:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/15 16:51:02 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/16 08:32:22 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,8 @@ void	ft_clean(t_arg *arg);
 void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo);
-//void	set_end_dinner(t_philo *philo);
+void	set_end_dinner(t_arg *arg);
 void	ft_write_state(t_philo *philo, const char *str, long time);
-//void	ft_thread_suspension(t_philo *philo, long action);
 void	ft_thread_suspension(long action);
 bool	end_dinner(t_philo *philo);
 long	ft_get_time(void);

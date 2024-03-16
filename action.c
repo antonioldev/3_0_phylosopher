@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 07:59:57 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/15 17:04:14 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/16 08:31:27 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,20 @@ void	ft_write_state(t_philo *philo, const char *str, long time)
 	pthread_mutex_lock(&philo->arg->write_mutex);
 	if (!(philo->arg->end))
 	{
-		pthread_mutex_lock(&philo->arg->arg_mutex);
 		if (ft_strcmp(str, "died") == 0)
-			philo->arg->end = true;
-		pthread_mutex_unlock(&philo->arg->arg_mutex);
+			set_end_dinner(philo->arg);
 		printf("%li %i %s\n", time, philo->id, str);	
 	}
 	pthread_mutex_unlock(&philo->arg->write_mutex);
 }
 
-void	ft_thread_suspension(long action)//(t_philo *philo, long action)
+void	ft_thread_suspension(long action)
 {
 	int		i;
 	long	time_to_wait;
 
 	i = 0;
-	//pthread_mutex_lock(&philo->arg->arg_mutex);
 	time_to_wait = action * 1000;
-	//pthread_mutex_unlock(&philo->arg->arg_mutex);
 	i = time_to_wait / 100000;
 	while (i-- > 0)
 		usleep(100000);
@@ -56,7 +52,7 @@ void	ft_eat(t_philo *philo)
 		philo->last_meal = time;
 		philo->meal_consumed++;
 		ft_write_state(philo, "is eating", philo->last_meal);
-		ft_thread_suspension(/*philo, */philo->arg->time_to_eat);
+		ft_thread_suspension(philo->arg->time_to_eat);
 		if (philo->meal_consumed == philo->arg->times_dinner)
 			philo->is_full = true;
 	}
@@ -74,7 +70,7 @@ void	ft_sleep(t_philo *philo)
 	{
 		time = ft_get_time();
 		ft_write_state(philo, "is sleeping", time);
-		ft_thread_suspension(/*philo, */philo->arg->time_to_sleep);
+		ft_thread_suspension(philo->arg->time_to_sleep);
 	}
 }
 
@@ -88,6 +84,6 @@ void	ft_think(t_philo *philo)
 	{
 		time = ft_get_time();
 		ft_write_state(philo, "is thinking", time);
-		ft_thread_suspension(/*philo, */philo->arg->time_to_think);
+		ft_thread_suspension(philo->arg->time_to_think);
 	}
 }

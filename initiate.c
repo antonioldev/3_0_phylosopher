@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:55:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/15 16:20:56 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/16 08:33:41 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	ft_initiate(t_arg *arg)//Check comment
 		arg->philos[i].meal_consumed = 0;
 		arg->philos[i].is_full = false;
 		arg->philos[i].arg = arg;
-		//pthread_mutex_init(&arg->philos[i].philo_mutex, NULL);
 	}
 	i = -1;
 	while (++i < arg->num_philo)

@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:25:25 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/15 16:23:52 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/16 08:33:10 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,21 @@ size_t	ft_strcmp(const char *s1, const char *s2)
 	return (0);
 }
 
-// void	set_end_dinner(t_philo *philo)
-// {
-// 	pthread_mutex_lock(&philo->arg->arg_mutex);
-// 	philo->arg->end = true;
-// 	pthread_mutex_unlock(&philo->arg->arg_mutex);
-// }
+void	set_end_dinner(t_arg *arg)
+{
+	pthread_mutex_lock(&arg->arg_mutex);
+	arg->end = true;
+	pthread_mutex_unlock(&arg->arg_mutex);
+}
 
 bool	end_dinner(t_philo *philo)
 {
 	bool	res;
 
 	res = false;
-	//pthread_mutex_lock(&philo->arg->arg_mutex);
+	pthread_mutex_lock(&philo->arg->arg_mutex);
 	res = philo->arg->end;
-	//pthread_mutex_unlock(&philo->arg->arg_mutex);
+	pthread_mutex_unlock(&philo->arg->arg_mutex);
 	return (res);
 }
 
@@ -59,13 +59,9 @@ void	ft_clean(t_arg *arg)
 {
 	int	i;
 
-	i = 0;
-	while (i < arg->num_philo)
-	{
-		//pthread_mutex_destroy(&arg->philos[i].philo_mutex);
+	i = -1;
+	while (++i < arg->num_philo)
 		pthread_mutex_destroy(&arg->forks[i].fork);
-		i++;
-	}
 	pthread_mutex_destroy(&arg->write_mutex);
 	free(arg->philos);
 	free(arg->forks);
