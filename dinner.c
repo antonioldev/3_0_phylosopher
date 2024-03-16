@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:28:52 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/16 11:15:21 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:03:55 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ static void	*dinner_alone(void *data)
 	pthread_mutex_lock(&philo->first_fork->fork);
 	ft_write_state(philo, "has taken a fork", ft_get_time());
 	pthread_mutex_unlock(&philo->first_fork->fork);
-	while (!end_dinner(philo))
+	while (!end_dinner(philo->arg))
 	{
 		time = ft_get_time();
 		if ((time - philo->last_meal) > philo->arg->time_to_die)
-			ft_write_state(philo, "died", time);
+			ft_write_state(philo, "died", time);//no
 	}
 	return (NULL);
 }
@@ -69,13 +69,41 @@ static void	*dinner(void *data)
 		usleep(1000);
 	if (philo->id % 2 == 0)
 		ft_thread_suspension(philo->arg->time_to_think);
-	while (!end_dinner(philo))
+	//while (!end_dinner(philo))
+	while (!end_dinner(philo->arg))
 	{
 		if (philo->is_full)
 			break ;
 		ft_eat(philo);
 		ft_sleep(philo);
 		ft_think(philo);
+	}
+	return (NULL);
+}
+
+static void	*check_dinner(void *data)
+{
+	int		i;
+	long	time;
+	t_arg	*arg;
+	t_philo	*philo;
+
+	arg = (t_arg *)data;
+	while (!end_dinner(arg))
+	{
+		i = 0;
+		while (i < arg->num_philo)
+		{
+			time = ft_get_time();
+			philo = arg->philos + i;
+			if (time - philo->last_meal > arg->time_to_die)
+			{
+				ft_write_state(philo , "died", time);
+				set_end_dinner(arg);
+				break ;
+			}
+			i++;
+		}
 	}
 	return (NULL);
 }
@@ -95,8 +123,9 @@ void	ft_simulation(t_arg *arg)
 				&arg->philos[i]);
 	arg->start = ft_get_time();
 	set_all_threads_ready(arg);
+	pthread_create(&arg->waiter, NULL, check_dinner,arg);
 	i = -1;
 	while (++i < arg->num_philo)
 		pthread_join(arg->philos[i].thread_id, NULL);
-	return ;
+	pthread_join(arg->waiter, NULL);
 }
