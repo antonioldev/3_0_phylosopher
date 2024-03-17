@@ -51,8 +51,13 @@ static int	ft_init_mutex(t_arg *arg)
 		return (-1);
 	i = -1;
 	while (++i < arg->num_philo)
+	{
+		if (pthread_mutex_init(&arg->philos[i].philo_mutex, NULL) != 0)
+			return (-1);
 		if (pthread_mutex_init(&arg->forks[i].fork, NULL) != 0)
 			return (-1);
+	}
+		
 	return (0);
 }
 

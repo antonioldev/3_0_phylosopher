@@ -28,7 +28,9 @@ void	ft_eat(t_philo *philo)
 		pthread_mutex_lock(&philo->second_fork->fork);
 		ft_write_state(philo, "has taken a fork", ft_get_time());
 		time = ft_get_time();
+		pthread_mutex_lock(&philo->philo_mutex);//
 		philo->last_meal = time;
+		pthread_mutex_unlock(&philo->philo_mutex);//
 		philo->meal_consumed++;
 		ft_write_state(philo, "is eating", philo->last_meal);
 		ft_thread_suspension(philo->arg->time_to_eat);

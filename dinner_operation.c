@@ -23,7 +23,7 @@ void	ft_write_state(t_philo *philo, const char *str, long time)
 	{
 		pthread_mutex_lock(&philo->arg->write_mutex);
 		//if (ft_strcmp(str, "died") == 0)
-			//set_end_dinner(philo->arg);
+		//	set_end_dinner(philo->arg);
 		printf("%li %3i %s\n", time, philo->id, str);
 		pthread_mutex_unlock(&philo->arg->write_mutex);
 	}

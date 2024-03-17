@@ -46,7 +46,10 @@ void	ft_clean(t_arg *arg)
 
 	i = -1;
 	while (++i < arg->num_philo)
+	{
+		pthread_mutex_destroy(&arg->philos[i].philo_mutex);
 		pthread_mutex_destroy(&arg->forks[i].fork);
+	}
 	pthread_mutex_destroy(&arg->write_mutex);
 	pthread_mutex_destroy(&arg->arg_mutex);
 	free(arg->philos);

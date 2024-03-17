@@ -81,10 +81,12 @@ static void	*dinner(void *data)
 	return (NULL);
 }
 
+/*This function check if any of the philo died of starvation*/
 static void	*check_dinner(void *data)
 {
 	int		i;
 	long	time;
+	long	time_elapsed;
 	t_arg	*arg;
 	t_philo	*philo;
 
@@ -94,9 +96,12 @@ static void	*check_dinner(void *data)
 		i = 0;
 		while (i < arg->num_philo)
 		{
-			time = ft_get_time();
 			philo = arg->philos + i;
-			if (time - philo->last_meal > arg->time_to_die)
+			time = ft_get_time();
+			pthread_mutex_lock(&philo->philo_mutex);
+			time_elapsed = time - philo->last_meal;
+			pthread_mutex_unlock(&philo->philo_mutex);
+			if (time_elapsed > arg->time_to_die)
 			{
 				ft_write_state(philo , "died", time);
 				set_end_dinner(arg);
