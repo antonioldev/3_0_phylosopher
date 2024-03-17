@@ -73,6 +73,8 @@ void	ft_think(t_philo *philo);
 void	set_end_dinner(t_arg *arg);
 void	ft_write_state(t_philo *philo, const char *str, long time);
 void	ft_thread_suspension(long action);
+void	set_all_threads_ready(t_arg *arg);
+bool	all_threads_ready(t_arg *arg);
 bool	end_dinner(t_arg *arg);
 long	ft_get_time(void);
 size_t	ft_strcmp(const char *s1, const char *s2);

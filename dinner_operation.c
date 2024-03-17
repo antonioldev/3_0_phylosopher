@@ -12,22 +12,29 @@
 
 #include "philo.h"
 
-/*This function write each status and terminate the program if a philo dies*/
-void	ft_write_state(t_philo *philo, const char *str, long time)
+/*This function is called after all threads have been created
+It sets the starting time of the simulation*/
+void	set_all_threads_ready(t_arg *arg)
 {
-	bool	end;
+	int	i;
 
-	end = end_dinner(philo->arg);
-	//pthread_mutex_lock(&philo->arg->write_mutex);
-	if (!end)
-	{
-		pthread_mutex_lock(&philo->arg->write_mutex);
-		//if (ft_strcmp(str, "died") == 0)
-		//	set_end_dinner(philo->arg);
-		printf("%li %3i %s\n", time, philo->id, str);
-		pthread_mutex_unlock(&philo->arg->write_mutex);
-	}
-	//pthread_mutex_unlock(&philo->arg->write_mutex);
+	i = -1;
+	while (++i < arg->num_philo)
+		arg->philos[i].last_meal = arg->start;
+	pthread_mutex_lock(&arg->arg_mutex);
+	arg->all_thread_ready = true;
+	pthread_mutex_unlock(&arg->arg_mutex);
+}
+
+/*This function check if all threads are ready*/
+bool	all_threads_ready(t_arg *arg)
+{
+	bool	res;
+
+	pthread_mutex_lock(&arg->arg_mutex);
+	res = arg->all_thread_ready;
+	pthread_mutex_unlock(&arg->arg_mutex);
+	return (res);
 }
 
 /*This function suspend the calling action*/
@@ -52,7 +59,7 @@ void	set_end_dinner(t_arg *arg)
 }
 
 /*This function check the status of the dinner*/
-bool	end_dinner(t_arg *arg)//t_philo *philo)
+bool	end_dinner(t_arg *arg)
 {
 	bool	res;
 

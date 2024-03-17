@@ -44,7 +44,7 @@ static int	ft_allocate_memory(t_fork **fork, t_philo **philo, int n)
 static int	ft_init_mutex(t_arg *arg)
 {
 	int	i;
-	
+
 	if (pthread_mutex_init(&arg->arg_mutex, NULL) != 0)
 		return (-1);
 	if (pthread_mutex_init(&arg->write_mutex, NULL) != 0)
@@ -57,14 +57,13 @@ static int	ft_init_mutex(t_arg *arg)
 		if (pthread_mutex_init(&arg->forks[i].fork, NULL) != 0)
 			return (-1);
 	}
-		
 	return (0);
 }
 
 /*This function initiate variables and allocate memory for philos and forks*/
 int	ft_initiate(t_arg *arg)
 {
-	int	i;//
+	int	i;
 
 	i = -1;
 	if (ft_allocate_memory(&arg->forks, &arg->philos, arg->num_philo) != 0
