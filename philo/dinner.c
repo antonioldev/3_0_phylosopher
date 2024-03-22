@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:28:52 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/16 17:03:55 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:46:09 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ static void	*dinner(void *data)
 	{
 		if (philo->is_full)
 			break ;
+		ft_think(philo);
 		ft_eat(philo);
 		ft_sleep(philo);
-		ft_think(philo);
+		//ft_think(philo);
 	}
 	return (NULL);
 }
