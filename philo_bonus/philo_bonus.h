@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:31:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/27 09:54:34 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:58:28 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_philo
 	bool			died;
 	sem_t			*print;
 	sem_t			*fork;
+	sem_t			*time;//
 	pthread_t		waiter;
 }				t_philo;
 

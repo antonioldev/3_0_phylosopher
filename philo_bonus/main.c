@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:08:02 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/27 09:18:14 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:56:02 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ int	main(int argc, char **argv)
 				ft_simulation(philo);
 			}
 		}
-		// 	ft_simulation(&arg);
-		// 	ft_clean(&arg);
 	}
 	ft_clean(philo);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:55:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/27 09:47:39 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:58:14 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	ft_initiate(t_philo *philo)
 		return (printf("Memory Allocation Failed\n"), 1);
 	sem_unlink ("/sem_printf");
 	sem_unlink ("/sem_fork");
+	sem_unlink ("/sem_time");
+	philo->time = sem_open ("/sem_time", O_CREAT, 0644, 1);
 	philo->print = sem_open ("/sem_printf", O_CREAT, 0644, 1);
 	philo->fork = sem_open ("/sem_fork", O_CREAT, 0644, philo->num_philo);
 	if (philo->print <= 0 || philo->fork <= 0)
