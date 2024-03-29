@@ -1,7 +1,7 @@
 NAME	=	philo_bonus
 CC		=	cc
 DEPS	=	philo_bonus.h
-FLAGS	=	-pthread -fsanitize=thread -g3 -gdwarf-3 #-Wall -Wextra -Werror -g
+FLAGS	=	-Wall -Wextra -Werror -pthread -g3 -fsanitize=thread -gdwarf-3
 SRC		=	main.c initiate.c dinner.c action.c utils.c
 OBJ		=	$(SRC:.c=.o)
 RM		=	rm -f

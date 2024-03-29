@@ -6,11 +6,51 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:25:25 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/27 12:37:29 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/29 13:51:39 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+/*This function convert the string into a long int*/
+long	ft_atol(const char *nptr)
+{
+	int		i;
+	long	result;
+
+	i = 0;
+	result = 0;
+	while (nptr[i] != '\0')
+	{
+		if (nptr[i] >= '0' && nptr[i] <= '9')
+		{
+			result *= 10;
+			result += (nptr[i] - '0');
+		}
+		else
+			return (-2);
+		i++;
+	}
+	if (result > INT_MAX)
+		return (-2);
+	return (result);
+}
+
+void	is_philo_dead(t_philo *philo)
+{
+	long long	time_elapsed;
+	long long	time;
+
+	time = ft_get_time();
+	time_elapsed = time - philo->last_meal;
+	if (time_elapsed > philo->time_to_die)
+	{
+		sem_wait(philo->print);
+		printf("%lli %3i %s\n", time, philo->id, "died");
+		ft_clean(philo);
+		exit (1);
+	}
+}
 
 /*Compare if two strings are equal*/
 size_t	ft_strcmp(const char *s1, const char *s2)
@@ -28,9 +68,9 @@ size_t	ft_strcmp(const char *s1, const char *s2)
 }
 
 /*This function get the time and convert into milliseconds*/
-long	ft_get_time(void)
+long long	ft_get_time(void)
 {
-	long			time;
+	long long		time;
 	struct timeval	current_time;
 
 	time = 0;
@@ -45,10 +85,8 @@ void	ft_clean(t_philo *philo)
 	int	i;
 	int	status;
 
-	i = 0;
-	while (i < philo->num_philo)
+	while (waitpid(-1, &status, 0) > 0)
 	{
-		waitpid(-1, &status, 0);
 		if (status != 0)
 		{
 			i = -1;
@@ -56,12 +94,12 @@ void	ft_clean(t_philo *philo)
 				kill(philo->pid[i], SIGKILL);
 			break ;
 		}
-		i++;
 	}
 	sem_close(philo->print);
 	sem_close(philo->fork);
 	sem_unlink ("/sem_printf");
 	sem_unlink ("/sem_fork");
-	free(philo->pid);
+	if (philo->pid)
+		free(philo->pid);
 	free(philo);
 }

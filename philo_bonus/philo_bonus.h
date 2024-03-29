@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:31:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/27 16:58:28 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/29 13:48:01 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,27 @@ typedef struct s_philo
 	long			time_to_sleep;
 	long			time_to_think;
 	long			times_dinner;
-	long			start;
+	long long		start;
 	long			meal_consumed;
-	long			last_meal;
+	long long		last_meal;
 	bool			is_full;
 	bool			stop;
 	bool			died;
 	sem_t			*print;
 	sem_t			*fork;
-	sem_t			*time;//
 	pthread_t		waiter;
 }				t_philo;
 
-int		ft_initiate(t_philo *philo);
-void	ft_simulation(t_philo *philo);
-void	ft_clean(t_philo *philo);
-void	ft_eat(t_philo *philo);
-void	ft_sleep(t_philo *philo);
-void	ft_think(t_philo *philo);
-void	ft_write_state(t_philo *philo, const char *str, long time);
-void	ft_thread_suspension(t_philo *philo, long action);
-//bool	end_dinner(t_philo *philo);
-long	ft_get_time(void);
-size_t	ft_strcmp(const char *s1, const char *s2);
+int			ft_check_args(int argc, char **argv, t_philo *philo);
+void		ft_simulation(t_philo *philo);
+void		ft_clean(t_philo *philo);
+void		ft_eat(t_philo *philo);
+void		ft_sleep(t_philo *philo);
+void		ft_think(t_philo *philo);
+void		ft_write_state(t_philo *philo, const char *str, long long time);
+void		ft_thread_suspension(t_philo *philo, long action);
+void		is_philo_dead(t_philo *philo);
+long		ft_atol(const char *nptr);
+long long	ft_get_time(void);
+size_t		ft_strcmp(const char *s1, const char *s2);
 #endif

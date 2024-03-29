@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 10:46:30 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/16 17:09:52 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:15:01 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	ft_thread_suspension(long action)
 
 	i = 0;
 	time_to_wait = action * 1000;
-	i = time_to_wait / 100000;
+	i = time_to_wait / 10000;
 	while (i-- > 0)
-		usleep(100000);
+		usleep(10000);
 }
 
 /*This function set the end of the dinner*/

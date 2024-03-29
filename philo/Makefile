@@ -1,7 +1,7 @@
 NAME	=	philo
 CC		=	cc
 DEPS	=	philo.h
-FLAGS	=	-Wall -Wextra -Werror -g -pthread -fsanitize=thread -g3 -gdwarf-3
+FLAGS	=	-Wall -Wextra -Werror -pthread -g3 -gdwarf-3 -fsanitize=thread 
 SRC		=	main.c initiate.c dinner.c action.c utils.c dinner_operation.c
 OBJ		=	$(SRC:.c=.o)
 RM		=	rm -f
