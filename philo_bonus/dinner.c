@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:28:52 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/29 14:53:33 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:04:57 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	dinner_alone(t_philo *philo)
 void	ft_simulation(t_philo *philo)
 {
 	philo->last_meal = philo->start;
-	//if (philo->id % 2 == 0)
-	//	ft_thread_suspension(philo, 10);
+	if (philo->id % 2 == 0)
+		ft_thread_suspension(philo, 1);
 	if (philo->num_philo > 1)
 	{
 		while (1)

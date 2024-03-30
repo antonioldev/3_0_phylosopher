@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 07:59:57 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/29 14:51:05 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:03:23 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ void	ft_eat(t_philo *philo)
 {
 	long long	time;
 
+	//is_philo_dead(philo);
 	sem_wait(philo->fork);
 	ft_write_state(philo, "has taken a fork", ft_get_time());
 	sem_wait(philo->fork);
 	ft_write_state(philo, "has taken a fork", ft_get_time());
-	is_philo_dead(philo);
+	//is_philo_dead(philo);
 	time = ft_get_time();
 	philo->last_meal = time;
 	ft_write_state(philo, "is eating", time);
