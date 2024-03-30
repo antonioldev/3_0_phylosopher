@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:25:25 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/29 13:51:39 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/30 11:21:09 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,13 @@ void	is_philo_dead(t_philo *philo)
 
 	time = ft_get_time();
 	time_elapsed = time - philo->last_meal;
-	if (time_elapsed > philo->time_to_die)
+	if (time_elapsed >= philo->time_to_die)
 	{
 		sem_wait(philo->print);
 		printf("%lli %3i %s\n", time, philo->id, "died");
 		ft_clean(philo);
 		exit (1);
 	}
-}
-
-/*Compare if two strings are equal*/
-size_t	ft_strcmp(const char *s1, const char *s2)
-{
-	size_t	i;
-
-	i = 0;
-	while (s1[i] != '\0' || s2[i] != '\0')
-	{
-		if ((unsigned char)s1[i] != (unsigned char)s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2 [i]);
-		i++;
-	}
-	return (0);
 }
 
 /*This function get the time and convert into milliseconds*/

@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:31:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/29 13:48:01 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/30 11:21:10 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,9 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include <stdint.h>
 # include <sys/wait.h>
 # include <unistd.h>
 # include <stdbool.h>
-# include <errno.h>
-# include <string.h>
-# include <pthread.h>
 # include <sys/time.h>
 # include <limits.h>
 # include <semaphore.h>
@@ -42,11 +38,8 @@ typedef struct s_philo
 	long			meal_consumed;
 	long long		last_meal;
 	bool			is_full;
-	bool			stop;
-	bool			died;
 	sem_t			*print;
 	sem_t			*fork;
-	pthread_t		waiter;
 }				t_philo;
 
 int			ft_check_args(int argc, char **argv, t_philo *philo);
@@ -60,5 +53,4 @@ void		ft_thread_suspension(t_philo *philo, long action);
 void		is_philo_dead(t_philo *philo);
 long		ft_atol(const char *nptr);
 long long	ft_get_time(void);
-size_t		ft_strcmp(const char *s1, const char *s2);
 #endif

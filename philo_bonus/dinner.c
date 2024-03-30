@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:28:52 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/29 15:04:57 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/03/30 11:21:26 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static void	dinner_alone(t_philo *philo)
 {
+	philo->last_meal = ft_get_time();
 	sem_wait(philo->fork);
 	ft_write_state(philo, "has taken a fork", ft_get_time());
-	while (!philo->died)
+	while (1)
 		is_philo_dead(philo);
 }
 
@@ -25,7 +26,7 @@ void	ft_simulation(t_philo *philo)
 {
 	philo->last_meal = philo->start;
 	if (philo->id % 2 == 0)
-		ft_thread_suspension(philo, 1);
+		usleep (800);
 	if (philo->num_philo > 1)
 	{
 		while (1)
