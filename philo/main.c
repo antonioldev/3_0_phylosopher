@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:08:02 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/16 12:27:04 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/04/02 11:44:39 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ static long	ft_decide_thinking_time(t_arg *arg)
 {
 	long	time;
 
-	if (arg->time_to_die >= 2 * (arg->time_to_eat + arg->time_to_sleep)
-		|| arg->time_to_eat == arg->time_to_sleep)
+	if (arg->time_to_die >= 2 * (arg->time_to_eat + arg->time_to_sleep))
 		time = arg->time_to_die - arg->time_to_eat - arg->time_to_sleep - 50;
 	else
 		time = arg->time_to_eat - arg->time_to_sleep;

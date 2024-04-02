@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 07:59:57 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/16 17:06:59 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/04/02 11:34:45 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ void	ft_think(t_philo *philo)
 	{
 		time = ft_get_time();
 		ft_write_state(philo, "is thinking", time);
+		ft_thread_suspension(philo->arg->time_to_think);
 	}
 }

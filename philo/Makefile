@@ -6,9 +6,6 @@ SRC		=	main.c initiate.c dinner.c action.c utils.c dinner_operation.c
 OBJ		=	$(SRC:.c=.o)
 RM		=	rm -f
 
-test	:
-		$(CC) $(SRC) -o $(NAME)
-
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJ)
