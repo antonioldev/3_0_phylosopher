@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 10:46:30 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/28 18:15:01 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:31:52 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,16 @@ bool	all_threads_ready(t_arg *arg)
 /*This function suspend the calling action*/
 void	ft_thread_suspension(long action)
 {
-	int		i;
-	long	time_to_wait;
+	long	time;
+	long	time_elapsed;
 
-	i = 0;
-	time_to_wait = action * 1000;
-	i = time_to_wait / 10000;
-	while (i-- > 0)
-		usleep(10000);
+	time = ft_get_time();
+	time_elapsed = ft_get_time();
+	while (time_elapsed - time < action)
+	{
+		usleep(500);
+		time_elapsed = ft_get_time();
+	}
 }
 
 /*This function set the end of the dinner*/

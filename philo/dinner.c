@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:28:52 by alimotta          #+#    #+#             */
-/*   Updated: 2024/04/02 11:36:16 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:54:23 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,18 @@ static void	*dinner(void *data)
 
 	philo = (t_philo *)data;
 	while (!all_threads_ready(philo->arg))
-		usleep(1000);
+		usleep(500);
+	ft_write_state(philo, "is thinking", ft_get_time());
 	if (philo->id % 2 == 0)
-		ft_thread_suspension(philo->arg->time_to_think);
+		usleep(500);
+	// 	ft_thread_suspension(philo->arg->time_to_think);
 	while (!end_dinner(philo->arg))
 	{
 		if (philo->is_full)
 			break ;
-		ft_think(philo);
 		ft_eat(philo);
 		ft_sleep(philo);
+		ft_think(philo);
 	}
 	return (NULL);
 }
