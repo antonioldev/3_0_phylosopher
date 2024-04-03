@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 10:46:30 by alimotta          #+#    #+#             */
-/*   Updated: 2024/04/02 13:31:52 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/04/03 09:10:32 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	set_all_threads_ready(t_arg *arg)
 
 	i = -1;
 	while (++i < arg->num_philo)
-		arg->philos[i].last_meal = arg->start;
+		arg->philos[i].last_meal = ft_get_time();
 	pthread_mutex_lock(&arg->arg_mutex);
 	arg->all_thread_ready = true;
 	pthread_mutex_unlock(&arg->arg_mutex);

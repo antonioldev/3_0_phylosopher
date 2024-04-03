@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:08:02 by alimotta          #+#    #+#             */
-/*   Updated: 2024/04/02 12:48:00 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/04/03 09:11:09 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static long	ft_decide_thinking_time(t_arg *arg)
 {
 	long	time;
 
-	if (arg->time_to_die >= 2 * (arg->time_to_eat + arg->time_to_sleep))
+	if (arg->time_to_die >= 2 * (arg->time_to_eat + arg->time_to_sleep)
+		|| (arg->time_to_eat == arg->time_to_sleep && arg->num_philo % 2 == 1))
 		time = arg->time_to_die - arg->time_to_eat - arg->time_to_sleep - 50;
 	else
 		time = arg->time_to_eat - arg->time_to_sleep;
@@ -70,6 +71,10 @@ static int	ft_check_args(int argc, char **argv, t_arg *arg)
 		return (printf("Arguments are invalid!\n"), 2);
 	if (arg->times_dinner == 0)
 		return (1);
+	if (arg->time_to_die < arg->time_to_eat)
+		arg->time_to_wait = arg->time_to_die;
+	else
+		arg->time_to_wait = arg->time_to_eat;
 	return (0);
 }
 

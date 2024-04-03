@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:31:46 by alimotta          #+#    #+#             */
-/*   Updated: 2024/03/16 15:39:34 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/04/03 09:10:40 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_arg
 	long			time_to_eat;
 	long			time_to_sleep;
 	long			time_to_think;
+	long			time_to_wait;
 	long			times_dinner;
 	long			start;
 	bool			end;
