@@ -6,7 +6,7 @@
 /*   By: alimotta <alimotta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:28:52 by alimotta          #+#    #+#             */
-/*   Updated: 2024/04/03 09:10:07 by alimotta         ###   ########.fr       */
+/*   Updated: 2024/04/03 10:10:57 by alimotta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	*check_dinner(void *data)
 			pthread_mutex_lock(&philo->philo_mutex);
 			time_elapsed = time - philo->last_meal;
 			pthread_mutex_unlock(&philo->philo_mutex);
-			if (time_elapsed > arg->time_to_die && !philo->is_full)
+			if (time_elapsed >= arg->time_to_die && !philo->is_full)
 			{
 				ft_write_state(philo, "died", time);
 				set_end_dinner(arg);
